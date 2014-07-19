@@ -15,3 +15,18 @@ else {
     document.getElementById("solution").style.display="block";
     }
 };
+
+$(function() {
+    setTimeout(updateChat, 5000)
+});
+
+function updateChat() {
+    $.getJSON(LATEST_CHAT_URL, function(data){
+        $.each(data.items, function(i,item){
+            var newChatLine = $('<span class="chat"></span>');
+            newChatLine.append('<span class="user">' + item.screenname + '</span>');
+            newChatLine.append('<span class="text">' + item.text + '</span>');
+            $('#chatbox').append(newChatLine);
+        });
+    });
+}
