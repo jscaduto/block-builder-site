@@ -1,20 +1,14 @@
 {% load static %}
+{% load tz %}
+{% extends "base_site.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'blockbuilder/blocks.css' %}" />
-    </head>
-    <body>
-        <div id="main">
-            <p>Enter a Phrase to Build</p>
-            <form action="" method="post">{% csrf_token %}
-                <div type='formerror'>{{ form.phrase_text.errors }}</div>
-                <div>{{ form.block_set_name }}</div>
-                <div>{{ form.phrase_text }}</div>
-                {{ form.solution.as_hidden }}
-                <input type="submit" value="Check" />
-            </form>
-        </div>
-    </body>
-</html>
+{% block content %}
+<p>Enter a Phrase to Build</p>
+<form action="" method="post">{% csrf_token %}
+  <div type='formerror'>{{ form.phrase_text.errors }}</div>
+  <div>{{ form.block_set_name }}</div>
+  <div>{{ form.phrase_text }}</div>
+  {{ form.solution.as_hidden }}
+  <input type="submit" value="Check" />
+</form>
+{% endblock %}

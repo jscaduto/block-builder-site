@@ -1,34 +1,28 @@
+{% extends "base_site.html" %}
+
 {% load static %}
 {% load tz %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'blockbuilder/blocks.css' %}" />
-        <script src="{% static 'blockbuilder/blocks.js' %}"></script>
-    </head>
-    <body>
-        <div id="main">
-                <div class="shelf">
-                <div class="word">
-                {% for letter in object.phrase_text %}
-                    {% if letter == ' ' %}
-                    </div>
-                    <div class="space"> </div>
-                    <div class="word">
-                    {% elif letter == '4' %}
-                        <div class="block" id="fourth">4<sup>th</sup></div>
-                    {% else %}
-                    <div class="block">{{ letter|upper }}</div>
-                    {% endif %}
-                {% endfor %}
-                </div></div>
-            <footer>
-                <!-- <p>request_date: {{ object.request_date|timezone:"America/Chicago" }}</p> -->
-                <!-- <p>possible: {{ object.possible }}</p> -->
-                <button id="showSolution" onclick="showSolution()">Show Solution</button>
-                <div id="solution">solution: {{ object.solution }}</div>
-            </footer>
-        </div>
-    </body>
-</html>
+{% block content %}
+<div class="shelf">
+<div class="word">
+  {% for letter in object.phrase_text %}
+    {% if letter == ' ' %}
+    </div>
+    <div class="space"> </div>
+    <div class="word">
+    {% elif letter == '4' %}
+      <div class="block" id="fourth">4<sup>th</sup></div>
+    {% else %}
+    <div class="block">{{ letter|upper }}</div>
+    {% endif %}
+  {% endfor %}
+</div></div>
+<footer>
+  <!-- <p>request_date: {{ object.request_date|timezone:"America/Chicago" }}</p> -->
+  <!-- <p>possible: {{ object.possible }}</p> -->
+  <button id="showSolution" onclick="showSolution()">Show Solution</button>
+  <div id="solution">solution: {{ object.solution }}</div>
+</footer>
+</div>
+{% endblock %}
