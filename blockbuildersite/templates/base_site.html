@@ -3,13 +3,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Can I Blocks It{% block title %}{% endblock %}</title>
+    <link rel="Shortcut Icon" href="{% static 'blockbuilder/blocksit-favicon.ico' %}" type="image/x-icon">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'blockbuilder/blocks.css' %}" />
-    <script src="{% static 'blockbuilder/blocks.js' %}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'blockbuilder/blocks.js' %}"></script>
   </head>
   <body>
-    <div id="main">
-      {% block content %}{% endblock %}
+    {% block navbar %}
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="container">
+        <button class="navbar-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Can I Blocks It</a>
+        <div class="nav-collapse">
+          {% block navbar_right %}
+          <ul class="nav navbar-nav pull-right">
+            {% if not session.logged_in %}
+              <li><a href="#">Login or Signup</a></li>
+            {% else %}
+              <li><a href="#">Logout</a></li>
+            {% endif %}
+          </ul>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+    <div class="container page">
+      <div class="content">
+        <div id="main">
+          {% block content %}
+          {% endblock %}
+          <div id="latestPhrases-title">Recent Phrases:</div>
+          <div id="latestPhrases"></div>
+        </div>
+      </div>
+      <hr>
+      {% block footer %}
+      <footer class="footer">
+        <p>&copy; 2013 Can-I-Blocks-It</p>
+      </footer>
+      {% endblock %}
     </div>
   </body>
 </html>
