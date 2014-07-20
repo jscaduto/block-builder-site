@@ -1,6 +1,5 @@
-import json
-
 from django.conf import settings
+from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.forms.util import ErrorList
 from django.http import HttpResponseRedirect, HttpResponse
@@ -43,5 +42,6 @@ class PhraseDetailView(DetailView):
 
 
 def get_lastest_phrases(request):
-    phrase = Phrase.objects.all()[5]
-    return HttpResponse(json.dumps(phrase), mimetype='application/json')
+    phrase = Phrase.objects.filter(possible=True).order_by('-request_date')[:5]
+    data = serializers.serialize('json', phrase, fields=('phrase_text'))
+    return HttpResponse(data, mimetype='application/json')

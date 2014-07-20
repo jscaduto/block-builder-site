@@ -17,16 +17,20 @@ else {
 };
 
 $(function() {
-    setTimeout(updateChat, 5000)
+    updatePhrases();
+    setInterval(updatePhrases,5000);
 });
 
-function updateChat() {
-    $.getJSON(LATEST_CHAT_URL, function(data){
-        $.each(data.items, function(i,item){
-            var newChatLine = $('<span class="chat"></span>');
-            newChatLine.append('<span class="user">' + item.screenname + '</span>');
-            newChatLine.append('<span class="text">' + item.text + '</span>');
-            $('#chatbox').append(newChatLine);
+LATEST_PHRASES_URL = '/blockbuilder/api/latest-phrases/'
+
+function updatePhrases() {
+    $.getJSON(LATEST_PHRASES_URL, function(data){
+        var latestPhrases = $('#latestPhrases')
+        latestPhrases.empty();
+        $.each(data, function(i,items){
+            var latestPhrase = $('<div class="phrase"></div>');
+            latestPhrase.append('<a class="phrase-link" href="/blockbuilder/phrase/'+ items.pk + '">' + items.fields.phrase_text + '</a>');
+            latestPhrases.append(latestPhrase);
         });
     });
 }
