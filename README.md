@@ -12,8 +12,8 @@ There is also logic in place to calculate the difficulty of the phrase based on 
 install
 ==================
 checkout and build this project like any django projects
-git clone repo
-pip install -r requirements.txt
-cd block-builder-site
-python manage.py runserver
+* git clone repo
+* pip install -r requirements.txt
+* cd block-builder-site
+* python manage.py runserver
 
